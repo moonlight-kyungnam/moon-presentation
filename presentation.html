@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainable Architectural Safety Innovation</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+            overflow: hidden; background-color: #111; color: #fff;
+        }
+        .slider { width: 100%; height: 100%; position: relative; }
+        .slide {
+            width: 100%; height: 100%; position: absolute;
+            top: 0; left: 0; opacity: 0; transition: opacity 0.5s ease-in-out;
+            background-size: contain; background-position: center; background-repeat: no-repeat;
+        }
+        .slide.active { opacity: 1; z-index: 10; }
+        
+        .controls {
+            position: absolute; bottom: 30px; right: 40px; z-index: 20;
+            display: flex; gap: 15px;
+        }
+        button {
+            background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255,255,255,0.3);
+            color: white; padding: 10px 20px; cursor: pointer; border-radius: 8px;
+            font-size: 1rem; transition: all 0.3s; backdrop-filter: blur(5px);
+        }
+        button:hover { background: rgba(255,255,255,0.2); border-color: #fff; }
+        .page-num { 
+            position: absolute; bottom: 35px; left: 40px; z-index: 20; 
+            font-size: 1.1rem; font-weight: 400; opacity: 0.8;
+            background: rgba(0, 0, 0, 0.6); padding: 5px 15px; border-radius: 20px;
+        }
+        .custom-closing {
+            background-color: #fdfaf4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .closing-content {
+            text-align: center;
+            max-width: 1000px;
+            padding: 60px;
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 0.8s ease 0.4s;
+        }
+        .slide.active .closing-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .closing-content h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.5;
+            color: #2d3436;
+            margin-bottom: 60px;
+            word-break: keep-all;
+            text-shadow: none;
+        }
+        .closing-content .author {
+            font-size: 1.4rem;
+            line-height: 1.7;
+            color: #2d3436;
+            text-align: right;
+            margin-top: 40px;
+            font-weight: 500;
+        }
+        .closing-content .author strong {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+<div class="slider">
+    <!-- PDF Pages -->
+    <div class="slide active" style="background-image: url('images/safety_innovation_page_0.png');"></div>
+    <div class="slide" style="background-image: url('images/safety_innovation_page_1.png');"></div>
+    <div class="slide" style="background-image: url('images/safety_innovation_page_2.png');"></div>
+    <div class="slide" style="background-image: url('images/safety_innovation_page_3.png');"></div>
+    <div class="slide" style="background-image: url('images/safety_innovation_page_4.png');"></div>
+    <div class="slide" style="background-image: url('images/safety_innovation_page_5.png');"></div>
+    <div class="slide" style="background-image: url('images/safety_innovation_page_6.png');"></div>
+    <div class="slide" style="background-image: url('images/safety_innovation_page_7.png');"></div>
+    <div class="slide" style="background-image: url('images/safety_innovation_page_8.png');"></div>
+    <div class="slide" style="background-image: url('images/safety_innovation_page_9.png');"></div>
+    <div class="slide" style="background-image: url('images/safety_innovation_page_10.png');"></div>
+    <div class="slide" style="background-image: url('images/safety_innovation_page_11.png');"></div>
+    <div class="slide" style="background-image: url('images/safety_innovation_page_12.png');"></div>
+    <div class="slide" style="background-image: url('images/safety_innovation_page_13.png');"></div>
+    <div class="slide" style="background-image: url('images/safety_innovation_page_14.png');"></div>
+    <div class="slide" style="background-image: url('images/safety_innovation_page_15.png');"></div>
+    <div class="slide" style="background-image: url('images/safety_innovation_page_16.png');"></div>
+    <div class="slide" style="background-image: url('images/safety_innovation_page_17.png');"></div>
+    <div class="slide" style="background-image: url('images/safety_innovation_page_18.png');"></div>
+    
+    <div class="slide custom-closing">
+        <div class="closing-content">
+            <h1>버려지는 것을 순환시켜 생명을 품고,<br>혁신적 소재로 일상의 안전을 건축합니다.</h1>
+            <div class="author">
+                지속 가능한 건축 안전 혁신의 파트너,<br>
+                <strong>문종욱 교수</strong> (경남대학교 건축학부)
+            </div>
+        </div>
+    </div>
+    
+    <div class="page-num" id="pageIndicator">1 / 20</div>
+    
+    <div class="controls">
+        <button onclick="prevSlide()">이전</button>
+        <button onclick="nextSlide()">다음</button>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const pageIndicator = document.getElementById('pageIndicator');
+
+    function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        if (index >= slides.length) currentSlide = 0;
+        if (index < 0) currentSlide = slides.length - 1;
+        slides[currentSlide].classList.add('active');
+        pageIndicator.textContent = `${currentSlide + 1} / ${slides.length}`;
+    }
+
+    function nextSlide() { currentSlide++; showSlide(currentSlide); }
+    function prevSlide() { currentSlide--; showSlide(currentSlide); }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') nextSlide();
+        if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
+    });
+</script>
+
+</body>
+</html>
